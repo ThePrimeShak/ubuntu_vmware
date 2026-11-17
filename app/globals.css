@@ -1,3 +1,288 @@
 @import "tailwindcss";
 
+:root {
+  --lab-accent: #e95420;
+  --lab-accent-strong: #c83d0a;
+  --lab-purple: #5e2750;
+  --lab-surface: #ffffff;
+  --lab-muted: #625d68;
+  --lab-border: color-mix(in srgb, var(--lab-purple) 15%, transparent);
+  --lab-shadow: 0 18px 55px rgba(52, 30, 48, 0.08);
+  --nextra-primary-hue: 17deg;
+  --nextra-primary-saturation: 82%;
+  /* Nextra also reads this value in IntersectionObserver.rootMargin. */
+  --nextra-navbar-height: 68px;
+  --nextra-content-width: 90rem;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 8% 4%,
+      rgba(233, 84, 32, 0.08),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 92% 2%,
+      rgba(94, 39, 80, 0.08),
+      transparent 30rem
+    ),
+    #f8f7fb;
+  color: #27232b;
+}
+
+::selection {
+  background: rgba(233, 84, 32, 0.22);
+}
+
+.brand-lockup {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 760;
+  gap: 0.65rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-mark {
+  align-items: center;
+  background: linear-gradient(145deg, var(--lab-purple), #772953);
+  border-radius: 0.6rem;
+  box-shadow: 0 7px 20px rgba(94, 39, 80, 0.2);
+  color: #fff;
+  display: inline-flex;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.nextra-navbar-blur {
+  box-shadow: 0 1px 0 rgba(94, 39, 80, 0.05);
+}
+
+main h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem) !important;
+  letter-spacing: -0.045em !important;
+  line-height: 1.08 !important;
+}
+
+main h2 {
+  border-top: 1px solid var(--lab-border);
+  letter-spacing: -0.025em;
+  margin-top: 3.5rem !important;
+  padding-top: 2.25rem;
+}
+
+main h3 {
+  letter-spacing: -0.015em;
+}
+
+main p,
+main li {
+  line-height: 1.78;
+}
+
+main img {
+  background: var(--lab-surface);
+  border: 1px solid var(--lab-border);
+  border-radius: 1rem;
+  box-shadow: var(--lab-shadow);
+  height: auto;
+  margin-block: 1.5rem;
+}
+
+main table {
+  font-size: 0.925rem;
+}
+
+main th {
+  background: color-mix(in srgb, var(--lab-purple) 7%, transparent);
+  white-space: nowrap;
+}
+
+main blockquote {
+  background: color-mix(in srgb, var(--lab-accent) 6%, transparent);
+  border-color: var(--lab-accent) !important;
+  border-radius: 0 0.8rem 0.8rem 0;
+  color: inherit !important;
+  padding: 0.8rem 1.1rem;
+}
+
+main :not(pre) > code {
+  border: 1px solid color-mix(in srgb, var(--lab-purple) 14%, transparent);
+}
+
+.lab-hero {
+  background: linear-gradient(
+    125deg,
+    rgba(94, 39, 80, 0.98),
+    rgba(60, 20, 53, 0.96)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 70px rgba(52, 25, 48, 0.2);
+  color: #fff;
+  margin: 0.75rem 0 2.5rem;
+  overflow: hidden;
+  padding: clamp(1.6rem, 5vw, 4rem);
+  position: relative;
+}
+
+.lab-hero::after {
+  background: var(--lab-accent);
+  border-radius: 999px;
+  content: "";
+  filter: blur(8px);
+  height: 12rem;
+  opacity: 0.28;
+  position: absolute;
+  right: -5rem;
+  top: -6rem;
+  width: 12rem;
+}
+
+.lab-hero__eyebrow {
+  color: #f7b59c;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.lab-hero h1 {
+  color: #fff !important;
+  margin: 0;
+  max-width: 13ch;
+}
+
+.lab-hero__lead {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  margin: 1.25rem 0 0;
+  max-width: 44rem;
+}
+
+.lab-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.6rem;
+}
+
+.lab-button {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0.7rem;
+  color: #fff !important;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  text-decoration: none !important;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.lab-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.lab-button--primary {
+  background: var(--lab-accent);
+  border-color: var(--lab-accent);
+}
+
+.lab-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.5rem 0;
+}
+
+.lab-card {
+  background: color-mix(in srgb, var(--lab-surface) 94%, var(--lab-purple));
+  border: 1px solid var(--lab-border);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(52, 30, 48, 0.05);
+  padding: 1.25rem;
+}
+
+.lab-card strong {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.lab-card p {
+  color: var(--lab-muted);
+  margin: 0;
+}
+
+html.dark {
+  --lab-surface: #19171e;
+  --lab-muted: #b9b3bf;
+  --lab-border: rgba(255, 255, 255, 0.1);
+  --lab-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
+}
+
+html.dark body {
+  background:
+    radial-gradient(
+      circle at 8% 4%,
+      rgba(233, 84, 32, 0.09),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 92% 2%,
+      rgba(119, 41, 83, 0.16),
+      transparent 30rem
+    ),
+    #111016;
+  color: #eeeaf0;
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --nextra-navbar-height: 60px;
+  }
+
+  .brand-lockup > span:last-child {
+    display: none;
+  }
+
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-hero {
+    border-radius: 1rem;
+    margin-top: 0;
+  }
+
+  main h2 {
+    margin-top: 2.75rem !important;
+    padding-top: 1.75rem;
+  }
+
+  main img {
+    border-radius: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .lab-button {
+    transition: none;
+  }
+}

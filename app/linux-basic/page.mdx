@@ -1,80 +1,54 @@
-# 🐧 Linux Basics
+# Linux Basics
 
-## 💻 What is Linux?
+## What Linux actually is
 
-**Linux** is an open-source operating system based on the Unix architecture. Unlike Windows and macOS, it's free to use, customizable, and used in everything from servers and desktops to phones and embedded systems.
+Strictly speaking, **Linux is a kernel**: the core software that manages a computer's CPU, memory, devices, processes, and system calls. A complete operating system combines the Linux kernel with user-space tools, libraries, a package manager, and—on desktop systems—a graphical environment.
 
-### 🔑 Key points:
+People often use “Linux” as convenient shorthand for a complete **Linux distribution**, such as Ubuntu, Debian, Fedora, or Arch Linux.
 
-- 🌟 **Open-source and community-driven**
-- 🔒 **Secure and stable**
-- 🎨 **Highly customizable**
-- 🚀 **Used in servers, development, networking, and education**
+## A short history
 
----
+- The GNU Project began developing free Unix-like tools in 1983.
+- Linus Torvalds released the first Linux kernel in 1991.
+- Distributions combined the kernel, GNU tools, package repositories, and installers into complete systems.
+- Today, Linux is widely used on servers, cloud platforms, supercomputers, embedded devices, developer workstations, and Android-based devices.
 
-## 📚 A Short History
+## Linux and Windows: a balanced comparison
 
-- **1991** – 👨‍💻 **Linus Torvalds** created the Linux kernel as a hobby project
-- 🔧 **Combined with GNU tools** to form a full operating system
-- 🤝 **Over time**, developers and companies contributed to it
-- 🌐 **Today** it powers the internet, supercomputers, Android devices, and IoT systems
+| Area                  | Linux distributions                                                          | Windows                                                                    |
+| --------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Licensing             | Mostly free and open source; licences vary by component                      | Proprietary, with open-source components                                   |
+| Software installation | Distribution repositories and package managers                               | Microsoft Store, package managers, and installers                          |
+| Customisation         | Extensive, including desktop and low-level system choices                    | Broad user customisation with a more standardised core                     |
+| Command line          | Shells and command-line tools are central to administration                  | PowerShell, Command Prompt, WSL, and graphical tools                       |
+| Typical strengths     | Servers, cloud, development, embedded systems                                | Desktop applications, gaming, enterprise desktops                          |
+| Security              | Strong permission model; security still depends on configuration and updates | Strong modern security features; also depends on configuration and updates |
 
----
+Neither system is automatically secure, fast, or appropriate for every workload. Hardware, software requirements, maintenance, and configuration matter more than simple platform labels.
 
-## ⚖️ Linux vs Windows (Quick Comparison)
+## What is a distribution?
 
-| 🏷️ **Feature**       | 🐧 **Linux**             | 🪟 **Windows**          |
-| -------------------- | ------------------------ | ----------------------- |
-| 💰 **License**       | Free & open-source       | Paid & closed-source    |
-| 🎨 **Customization** | Very high                | Limited                 |
-| 🔒 **Security**      | Very strong              | More vulnerable         |
-| ⚡ **Performance**   | Lightweight & efficient  | Heavier resource usage  |
-| 💻 **Terminal**      | Powerful & essential     | Optional & limited      |
-| 🎯 **Usage**         | Servers, dev, networking | Desktop, gaming, office |
+A **distribution** packages the Linux kernel with system tools, a package manager, repositories, defaults, and release policies. Desktop distributions usually add a graphical environment and common applications.
 
----
+| Distribution | Good fit for                             | Important characteristic                                         |
+| ------------ | ---------------------------------------- | ---------------------------------------------------------------- |
+| Ubuntu       | Beginners, education, desktops, cloud    | Predictable LTS releases and extensive documentation             |
+| Debian       | Stable desktops and servers              | Community governed and deliberately conservative stable releases |
+| Fedora       | Developers and newer Linux technologies  | Closely connected to the Red Hat ecosystem                       |
+| Arch Linux   | Experienced users who want control       | Rolling release with a manual, do-it-yourself approach           |
+| Linux Mint   | Desktop users moving from Windows        | Familiar desktop experience based on Ubuntu or Debian            |
+| Kali Linux   | Authorised security testing and training | Specialised toolset; not intended as a general beginner desktop  |
 
-## 📦 What Are Linux Distributions (Distros)?
+> For this lab, Ubuntu is the easiest starting point. Debian is included as a second option for students who want to see a more traditional installer and fewer distribution-specific conveniences.
 
-A **distribution** (or "distro") is a packaged version of Linux that includes the kernel plus desktop environment, tools, and apps. Different distros are designed for different purposes.
+## Core concepts to remember
 
----
+- Linux is the kernel; a distribution is the usable operating-system package around it.
+- Package managers track dependencies. On Ubuntu and Debian, APT verifies signed repository metadata and package checksums; it does not check a separate signature on every installed package.
+- Users normally work without administrator privileges and use `sudo` only when required.
+- Paths begin at the root directory `/`, and names are case-sensitive.
+- The same fundamentals apply across most distributions even when their installers and desktop environments differ.
 
-✅ Popular Linux Distros & What They’re Good For
+## Reference
 
-### 🟣 **Ubuntu**
-
-- 🆕 **Beginner-friendly**
-- 💻 **Great for development and education**
-- 👥 **Large community support**
-- 🖥️ **Used in servers and desktops**
-
-### 🔵 **Debian**
-
-- 🏛️ **Very stable**
-- 🏗️ **Used as the base for Ubuntu**
-- 🖥️ **Great for servers**
-
-### 🟢 **Fedora**
-
-- ✨ **Cutting-edge features**
-- 🏢 **Backed by Red Hat**
-- 👨‍💻 **Mostly for developers and testing**
-
-### 🔴 **Arch Linux**
-
-- 🎛️ **Highly customizable**
-- 🎓 **Targeted at advanced users**
-- ⚙️ **Manual installation**
-
-### ⚫ **Kali Linux**
-
-- 🛡️ **For penetration testing & cybersecurity**
-- 🔧 **Comes with security tools pre-installed**
-
-### 🟡 **Linux Mint**
-
-- 🔄 **Easy for Windows users**
-- 🪶 **Lightweight and user-friendly**
-- 🏠 **Good for personal use**
+[Debian's APT authentication manual](https://manpages.debian.org/trixie/apt/apt-secure.8.en.html) explains the repository trust model.

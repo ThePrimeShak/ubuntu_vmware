@@ -21,6 +21,7 @@ const eslintConfig = [
       "components/ui/**/*",
       ".next/**/*",
       "node_modules/**/*",
+      "public/_pagefind/**/*",
       "next-env.d.ts",
     ],
   },

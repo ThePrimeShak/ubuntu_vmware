@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Linux & Virtualization Lab
 
-## Getting Started
+A responsive learning guide for an Operating Systems Laboratory course. It covers Linux fundamentals, virtualization, VMware Workstation, Ubuntu and Debian installation, terminal commands, root access, swap, and dual boot.
 
-First, run the development server:
+## Tech stack
+
+- Next.js 15 and React 19
+- Nextra 4 documentation theme
+- TypeScript and Tailwind CSS
+- Pagefind search
+
+## Run locally
+
+Use Node.js 20 or newer.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The root URL redirects to `/intro`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality checks
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run format:check
+npm run build
+```
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+- `app/` — documentation pages, navigation metadata, and global styling
+- `public/images/` — step-by-step installation screenshots
+- `next.config.mjs` — Nextra and redirect configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Author
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Created by [ThePrimeShak](https://www.linkedin.com/in/ThePrimeShak) for an Operating Systems Lab course. Source code is available on [GitHub](https://github.com/ThePrimeShak/ubuntu_vmware).

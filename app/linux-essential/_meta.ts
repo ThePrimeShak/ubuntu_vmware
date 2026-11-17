@@ -2,28 +2,28 @@ import type { MetaRecord } from "nextra";
 
 const config: MetaRecord = {
   introduction: {
-    title: "Introduction 🚀",
+    title: "Introduction",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   root: {
-    title: "Root 🔑",
+    title: "Root",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   "dual-boot": {
-    title: "Dual Boot 🔄",
+    title: "Dual Boot",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   swap: {
-    title: "Swap 💾",
+    title: "Swap",
     theme: {
       breadcrumb: false,
       copyPage: false,

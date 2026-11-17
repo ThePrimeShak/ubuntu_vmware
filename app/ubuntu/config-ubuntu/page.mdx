@@ -1,129 +1,106 @@
-# ⚙️ Ubuntu: Installation Configuration
+# Install Ubuntu Desktop
 
-This short guide describes the on-screen configuration steps inside the Ubuntu Desktop installer (runs inside the VM).  
-Follow the steps in order — each line is a single user action in the installer UI.
+These steps run inside the virtual machine. The screenshots show Ubuntu 24.04.3 LTS; newer releases can use different wording or group the same choices differently. Consult the [official Ubuntu installation guide](https://ubuntu.com/desktop/docs/en/latest/tutorial/install-ubuntu-desktop/) for the current installer.
 
----
+> **Important:** “Erase disk and install Ubuntu” is safe here only because the selected disk is the new VMware virtual disk. Do not choose it on a physical computer unless you intend to erase that physical disk.
 
-## Step 1 — Select system language
+## 1. Choose language and accessibility settings
 
-- Choose **English** (or your preferred English variant) on the first installer screen.
-- Click **Continue**.
+Select your preferred language, review any accessibility options you need, and continue.
 
-![Step 1: Ubuntu installer language selection](/images/ubuntu/vmware/step1.png)
+![Ubuntu installer language selection](/images/ubuntu/vmware/step1.png)
 
-## Step 2 — Accessibility
+![Ubuntu installer accessibility options](/images/ubuntu/vmware/step2.png)
 
-- On the accessibility screen, click **Next** (or **Continue**) to proceed (no mandatory changes required for lab use).
+## 2. Select the keyboard layout
 
-![Step 2: Accessibility options screen](/images/ubuntu/vmware/step2.png)
+Choose the layout that matches the host keyboard. Use the test field to confirm punctuation and special keys.
 
-## Step 3 — Keyboard layout
+![Ubuntu keyboard-layout selection](/images/ubuntu/vmware/step3.png)
 
-- Select **English (US)** or the appropriate English keyboard layout.
-- Click **Continue**.
+## 3. Connect to the network
 
-![Step 3: Keyboard layout selection](/images/ubuntu/vmware/step3.png)
+With the VMware adapter set to NAT, Ubuntu normally detects a wired connection automatically. You can install offline, but updates, codecs, and third-party drivers require internet access.
 
-## Step 4 — Network (Use wired connection)
+![Ubuntu installer network screen](/images/ubuntu/vmware/step4.png)
 
-- If possible, ensure the VM has a wired (Ethernet) connection enabled in VMware (NAT is fine).
-- The installer will auto-detect a wired connection; if detected, it will show as connected.
-- If no wired network is available, you may continue offline and configure networking later.
+## 4. Start installation
 
-![Step 4: Network detection (wired connection)](/images/ubuntu/vmware/step4.png)
+Choose **Install Ubuntu** rather than the live-session option when the installer asks whether to try or install the system.
 
-## Step 5 — Choose installation mode
+![Install Ubuntu option](/images/ubuntu/vmware/step5.png)
 
-- Click **Install Ubuntu** to start the installation process (not "Try Ubuntu").
+## 5. Choose interactive installation
 
-![Step 5: Install Ubuntu option selected](/images/ubuntu/vmware/step5.png)
+Select the standard interactive/default installation. Depending on the Ubuntu release, the next screen may offer a default or extended application selection.
 
-## Step 6 — Installation type (interactive / selection)
+![Ubuntu interactive installation option](/images/ubuntu/vmware/step6.png)
 
-- Choose **Normal installation** (interactive / default).
-  - _This installs the standard desktop with common utilities and tools._
+![Ubuntu application selection](/images/ubuntu/vmware/step7.png)
 
-![Step 6: Installation type - Normal installation selected](/images/ubuntu/vmware/step6.png)
+## 6. Updates and third-party software
 
-## Step 7 — Keep default selections where appropriate
+Enable update downloads during installation when the connection is reliable. Third-party drivers and media formats are optional; they can improve hardware and codec support, though a basic VMware lab usually works without them.
 
-- On the same screen, leave default selections unless you have a specific reason to change them.
+![Ubuntu optimisation and third-party software options](/images/ubuntu/vmware/step8.png)
 
-![Step 7: Default options retained](/images/ubuntu/vmware/step7.png)
+## 7. Select the virtual disk
 
-## Step 8 — Download & third-party options (two checkboxes)
+Choose **Erase disk and install Ubuntu**, verify that the target is the VMware virtual disk of roughly the size you created, and confirm the changes.
 
-- **Check** the boxes (if you want):
-  - **Download updates while installing Ubuntu**
-  - **Install third-party software for graphics and Wi-Fi hardware and additional media formats**
-- These are optional: checking them downloads drivers/codecs during install (recommended if you have internet).
+![Ubuntu virtual-disk setup](/images/ubuntu/vmware/step9.png)
 
-![Step 8: Download updates & third-party software options](/images/ubuntu/vmware/step8.png)
+## 8. Create the user account
 
-## Step 9 — Installation type: disk choice
+Enter a name, computer name, lowercase username, and strong password. Require the password to log in so the lab reflects a normal security configuration.
 
-- Select **Erase disk and install Ubuntu** (this only affects the VM's virtual disk).
-- Click **Install Now**, then **Continue** to confirm write changes.
+![Ubuntu user-account setup](/images/ubuntu/vmware/step10.png)
 
-![Step 9: Disk selection - Erase disk and install Ubuntu](/images/ubuntu/vmware/step9.png)
+## 9. Set the timezone
 
-## Step 10 — Enter user information and password
+Select the correct region and city. The VM clock normally synchronises through the network after installation.
 
-- When prompted, enter:
-  - **Your name (Full name)**
-  - **Computer name** (optional, default is fine)
-  - **Username** (e.g., `student`)
-  - **Password** (and confirm)
-- Choose whether to require your password to log in or to log in automatically.
+![Ubuntu timezone selection](/images/ubuntu/vmware/step11.png)
 
-![Step 10: User account setup form](/images/ubuntu/vmware/step10.png)
+## 10. Review and install
 
-## Step 11 — Select location / timezone
+Review the summary, begin installation, and wait while files are copied and packages are configured.
 
-- Choose your **region / city** for the correct timezone.
-- Click **Continue**.
+![Ubuntu installation summary before clicking Install](/images/ubuntu/vmware/step12.png)
 
-![Step 11: Timezone / location selection map](/images/ubuntu/vmware/step11.png)
+## 11. Restart and disconnect the ISO
 
-## Step 12 — Start installation
+Select **Restart Now** when installation finishes.
 
-- After confirming options, click **Install** to begin copying files and configuring the system.
-- Wait for the installation progress to finish (this may take several minutes).
+![Ubuntu restart prompt](/images/ubuntu/vmware/step13.png)
 
-![Step 12: Installation progress screen](/images/ubuntu/vmware/step12.png)
+If Ubuntu asks you to remove the installation medium, use VMware's **VM → Removable Devices → CD/DVD → Disconnect** command and press Enter. If the installer starts again, power off the VM and disconnect the ISO before the next boot.
 
----
+## 12. Complete first-run setup
 
-## Step 13 — Restart the VM
+Review Ubuntu Pro and privacy options. Ubuntu Pro is optional for this lab; you can skip it. Sharing diagnostic information is also optional.
 
-- When the installer finishes, click **Restart Now**.
-- The VM will reboot.
+![Ubuntu Pro first-run screen with the option to skip](/images/ubuntu/vmware/step14.png)
 
-![Step 13: Installation complete - Restart Now prompt](/images/ubuntu/vmware/step13.png)
+![Ubuntu diagnostics preference](/images/ubuntu/vmware/step15.png)
 
----
+![Ubuntu first-run completion screen with Open App Center](/images/ubuntu/vmware/step16.png)
 
-## Step 14 — If prompted about installation media
+## 13. Update the installed system
 
-- If you see **"Please remove the installation medium and press ENTER"**, either eject the ISO from VMware or simply press **Enter** / click **Skip Now** (if the VM UI shows that) so the VM boots into the installed system instead of the installer again.
+Open the terminal with `Ctrl + Alt + T` and run:
 
-![Step 14: Remove installation medium prompt](/images/ubuntu/vmware/step14.png)
+```bash
+sudo apt update
+sudo apt full-upgrade
+sudo apt install open-vm-tools-desktop
+```
 
----
+Restart after significant updates. Then take a VMware snapshot named `Clean install` before beginning lab experiments.
 
-## Step 15 — First-run: telemetry / system data prompt
+## Verify the result
 
-- On first login the Welcome dialog may ask: **"Help improve Ubuntu"** (send system info).
-- For privacy in a lab environment, choose **No / Don't share system data** (or the option labelled **"No, don't send system info"**).
-
-![Step 15: Help improve Ubuntu telemetry prompt](/images/ubuntu/vmware/step15.png)
-
----
-
-## Step 16 — Finish
-
-- Complete any final first-run dialogs and click **Finish** / **Done**.
-- You should now be at the Ubuntu desktop and can open the terminal (`Ctrl + Alt + T`) to begin working.
-
-![Step 16: Ubuntu desktop ready for use](/images/ubuntu/vmware/step16.png)
+- Ubuntu reaches the login screen without the installer ISO.
+- Display resizing works and the network is connected.
+- `sudo apt update` completes without errors.
+- `free -h`, `df -h`, and `ip address` show the expected resources.

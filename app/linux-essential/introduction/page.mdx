@@ -1,25 +1,22 @@
-# 🐧 Linux Essentials — Introduction
+# Linux Essentials
 
-The **Linux Essentials** section introduces the core concepts that every student or beginner should know before working with Linux installations.  
-These are the building blocks that appear in almost every distribution, whether you are using Ubuntu, Debian, or others.
+This section explains four concepts that often appear during Linux installation and administration:
 
----
+- **Root user:** the administrator account with unrestricted system privileges
+- **Root directory (`/`):** the top of the Linux filesystem tree
+- **Swap:** disk space that can hold memory pages and can support hibernation
+- **Dual boot:** installing multiple operating systems on one physical computer
 
-## 📋 What you will learn in this section
+## Why these topics matter
 
-- 🔑 **Root** — the superuser account and the root filesystem (`/`)
-- 💾 **Swap** — extra virtual memory used when RAM is full
-- 🔀 **Dual-Boot** — installing Linux alongside another operating system
-- 🧭 **Installation basics** — general concepts that apply during setup
+They help you interpret installer choices, understand privilege boundaries, and avoid costly mistakes. In particular, root commands and physical-disk partitioning can permanently change data.
 
----
+The virtual-machine installation in this project is safer than dual boot because it writes to a virtual disk file. Even so, read device names and commands carefully before confirming destructive actions.
 
-## 🎯 Why it matters
+## Suggested order
 
-Understanding these topics helps you:
+1. Learn the two meanings of root.
+2. Understand how swap complements—but does not replace—RAM.
+3. Read the dual-boot page only if you plan to install Linux on physical hardware.
 
-- Make correct choices during installation.
-- Avoid common mistakes (like removing the wrong partition).
-- Build a solid foundation for more advanced Linux topics later.
-
-> 🚀 In short, this section gives you the **essentials** you need for working confidently with Linux systems.
+> Create backups before storage or partition changes. A snapshot is useful for a VM, but it is not a substitute for a backup stored on another device.

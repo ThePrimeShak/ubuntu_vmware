@@ -2,14 +2,14 @@ import type { MetaRecord } from "nextra";
 
 const config: MetaRecord = {
   "what-is-terminal": {
-    title: "What is Terminal? ❓",
+    title: "What is a Terminal?",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   "basic-commands": {
-    title: "Basic Terminal Commands ⌨️",
+    title: "Basic Commands",
     theme: {
       breadcrumb: false,
       copyPage: false,

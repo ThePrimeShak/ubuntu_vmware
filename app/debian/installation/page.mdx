@@ -1,0 +1,87 @@
+# Install Debian in VMware Workstation
+
+This completes the Debian section with a practical installation path for the current stable 64-bit release. The exact artwork and wording can change between point releases.
+
+## 1. Download and verify Debian
+
+1. Open the official [Debian download page](https://www.debian.org/distrib/).
+2. Download the current stable **amd64 netinst ISO** for an Intel or AMD 64-bit VM.
+3. Download the matching `SHA256SUMS` and `SHA256SUMS.sign` files from the same image directory.
+4. In Windows PowerShell, compare the ISO hash:
+
+```powershell
+Get-FileHash .\debian-*-amd64-netinst.iso -Algorithm SHA256
+```
+
+Compare the result for the exact ISO filename with its entry in `SHA256SUMS`. This checks integrity. To authenticate the checksum file, follow [Debian's image-verification instructions](https://www.debian.org/CD/verify) to check `SHA256SUMS.sign` with a trusted Debian signing key.
+
+## 2. Create the virtual machine
+
+In VMware Workstation, select **File → New Virtual Machine → Typical** and attach the Debian ISO. If VMware asks for the guest type, choose **Linux → Debian 13.x 64-bit** or the closest available Debian 64-bit option.
+
+Suggested settings:
+
+| Resource | Suggested value                               |
+| -------- | --------------------------------------------- |
+| CPU      | 2 virtual cores                               |
+| Memory   | 4 GB for a desktop; 2 GB for a minimal system |
+| Disk     | 30 GB, dynamically allocated                  |
+| Network  | NAT                                           |
+| Firmware | UEFI                                          |
+
+## 3. Start the installer
+
+Power on the VM and choose **Graphical install**. Select the language, location, and keyboard layout. The installer then configures the virtual network with DHCP.
+
+Use a short hostname such as `debian-lab`. A domain name is optional for a standalone lab VM and can be left blank.
+
+## 4. Create accounts
+
+The installer may ask for a root password. For a beginner lab, leave the root password blank when the installer explains that this enables `sudo` for the first user. Then create a regular user with a strong password.
+
+> Do not use the root account for everyday work. Administrative commands should be deliberate and auditable.
+
+## 5. Partition the virtual disk
+
+Because this is a new virtual disk used only by the VM, choose **Guided — use entire disk**, select the VMware virtual disk, and use **All files in one partition** for a simple lab setup. Review the summary carefully, then confirm **Finish partitioning and write changes to disk**.
+
+This erases only the selected virtual disk. It does not erase the Windows host disk unless a physical disk has been manually attached to the VM.
+
+## 6. Configure packages
+
+1. Choose a nearby Debian mirror when asked.
+2. Leave the proxy field blank unless your network requires one.
+3. In **Software selection**, keep **Debian desktop environment**, choose one desktop such as GNOME, and keep **standard system utilities** selected.
+4. Select **SSH server** only if the lab needs remote access.
+
+The installer downloads packages, so the netinst image normally needs internet access.
+
+## 7. Install the boot loader
+
+Allow the installer to install GRUB on the primary virtual disk. When installation finishes, reboot. VMware normally disconnects the ISO automatically; if the installer starts again, disconnect the virtual CD/DVD or move the virtual disk above it in the boot order.
+
+## 8. Update and install VMware integration
+
+After logging in, open a terminal and run:
+
+```bash
+sudo apt update
+sudo apt full-upgrade
+sudo apt install open-vm-tools
+```
+
+For a graphical desktop, also run `sudo apt install open-vm-tools-desktop`. A minimal console-only VM does not need the desktop package.
+
+Restart the VM after significant kernel or desktop updates. Then create a clean snapshot before beginning experiments.
+
+## Installation checklist
+
+- The VM reaches the Debian login screen without the ISO.
+- The regular user can run `sudo`.
+- `ip address` shows an assigned address and `ip route` shows a default route. `ping -c 3 debian.org` can help test connectivity, but some networks block ICMP.
+- On a desktop VM, check display resizing after installing open-vm-tools-desktop. Clipboard support also depends on the guest session and VMware Guest Isolation settings.
+- `sudo apt update` completes without repository errors.
+
+## Reference
+
+[Debian 13 installation manual](https://www.debian.org/releases/trixie/amd64/ch06s03.en.html) covers accounts, partitioning, packages, and boot-loader installation.

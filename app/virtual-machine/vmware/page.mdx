@@ -1,83 +1,51 @@
-# 💻 Virtual Machines & VMware
+# Virtual Machines and VMware
 
-## 🤖 What is a Virtual Machine?
+## What is a virtual machine?
 
-A **Virtual Machine (VM)** is a software-based simulation of a physical computer. It lets you run another operating system — such as **Ubuntu** — inside your existing one, sharing your real hardware resources.
+A **virtual machine (VM)** is an isolated software environment that behaves like a computer. A VM has virtual CPUs, memory, storage, network adapters, and other devices supplied by a **hypervisor**. The operating system running inside the VM is the **guest**; the physical computer is the **host**.
 
-The VM behaves like a separate computer, with virtualized:
+Virtual machines are especially useful in an operating-systems lab because a mistake inside the guest is less likely to damage the host. This isolation is useful, but it is not an absolute security boundary: keep VMware and the guest operating system updated and avoid running untrusted malware.
 
-- 🖥️ **CPU**
-- 💾 **Memory**
-- 💽 **Disk**
-- 🌐 **Network interface**
+## Hypervisor types
 
-All isolated from your main system.
+### Type 1: bare-metal
 
----
+A type-1 hypervisor runs directly on the hardware and is common in servers and data centres. Examples include VMware ESXi and Microsoft Hyper-V.
 
-## ✨ Advantages and Use Cases
+### Type 2: hosted
 
-### 🎯 **Advantages:**
+A hosted hypervisor runs as an application on a desktop operating system. VMware Workstation and Oracle VirtualBox are familiar examples. Modern implementations can also use hardware-virtualisation services provided by the host OS, so the boundary between the two categories is not always perfectly simple.
 
-- 🧠 **Learn multiple operating systems** on one device
-- 🧪 **Safe sandbox environment** — changes stay inside the VM
-- 🧰 **Easy to back up, clone, or restore**
-- 💻 **Perfect for programming and OS experiments**
-- 🧩 **Run old software** that needs a different OS version
+## Why use a VM in this lab?
 
-### 🔧 **Use Cases:**
+- Keep the host operating system and its partitions unchanged.
+- Reset experiments by reverting a snapshot or recreating the VM.
+- Run Linux and the host OS at the same time.
+- Practise installation, users, packages, services, and networking safely.
+- Use a repeatable hardware configuration across different student computers.
 
-- 🎓 **OS and system programming labs**
-- 🔒 **Network and security testing**
-- ⚙️ **Server configuration practice**
-- 🐧 **Running Linux on Windows or macOS**
+The trade-offs are additional RAM, CPU, and storage usage. Graphics-intensive workloads and direct hardware access may also perform better on a physical installation.
 
----
+## VMware Workstation
 
-## ⚙️ How Virtual Machines Work
+**VMware Workstation Pro** is a desktop hypervisor for Windows and Linux hosts. VMware Fusion is the related product for macOS. Workstation supports common lab features such as snapshots, virtual networks, shared folders, clipboard integration, and adjustable virtual hardware.
 
-A VM runs on top of a **hypervisor**: software that mediates between your physical hardware (host) and the virtualized environment (guest).
+Since Workstation Pro 17.5.2, Broadcom makes the current desktop hypervisor available without a licence key for personal, educational, and commercial use. Downloads require a Broadcom Support Portal account, and availability can be subject to regional export requirements.
 
-### 🏗️ Types of Hypervisors
+## Recommended lab configuration
 
-#### Type 1 (Bare-metal)
+| Resource  | Suggested value                   | Notes                                                                     |
+| --------- | --------------------------------- | ------------------------------------------------------------------------- |
+| CPU       | 2 virtual cores                   | Do not assign every host core to the VM                                   |
+| Memory    | 6 GB for Ubuntu Desktop 26.04 LTS | Leave enough memory for the host OS; Debian's needs depend on the desktop |
+| Storage   | 30–40 GB, dynamically allocated   | Ubuntu documents at least 25 GB of free storage                           |
+| Network   | NAT                               | Easiest internet access for most labs                                     |
+| Firmware  | UEFI                              | Suitable for current Ubuntu and Debian releases                           |
+| Snapshots | One clean snapshot after setup    | Snapshots are not backups                                                 |
 
-- 🏢 Runs directly on the hardware
-- 📝 Examples: VMware ESXi, Microsoft Hyper-V
+> On an 8 GB host, a 6 GB Ubuntu Desktop VM leaves little memory for the host. Consider a minimal Debian VM or a lighter desktop instead. Never allocate more resources than the host can sustain.
 
-#### Type 2 (Hosted)
+## References
 
-- 🖥️ Runs inside an existing operating system
-- 📝 Examples: VMware Workstation, VirtualBox
-
-### 🔍 What Happens Behind the Scenes
-
-1. 📊 The hypervisor allocates resources (CPU, RAM, disk) to each VM
-2. 🔄 It translates guest OS instructions into real hardware actions
-3. 🛡️ It isolates VMs—one crash doesn’t affect others
-4. 🎭 It emulates hardware (network card, display adapter, etc.) for the guest
-
-> 💡 This creates the illusion the guest fully controls the hardware—while it’s safely sharing it.
-
----
-
-## 🏆 Why VMware?
-
-VMware is used in this course because:
-
-- ✅ **Very stable and widely supported**
-- ⚙️ **Easy setup and intuitive interface**
-- 💽 **Excellent performance** for both Linux and Windows VMs
-- 🔄 **Supports advanced features** like snapshot, drag-and-drop, and shared folders
-- 🧩 **Cross-platform compatibility** (Windows, macOS, Linux hosts)
-
----
-
-## 🤷‍♂️ Why Not Install Ubuntu Directly?
-
-Using a VM instead of installing Ubuntu on bare metal gives:
-
-- 🎨 **Flexibility** — keep your main OS untouched
-- 🛡️ **Safety** — you can freely experiment without system damage
-- ♻️ **Reusability** — one machine can host many OS environments
-- ⏯️ **Convenience** — pause, resume, or delete anytime
+- [Broadcom's Workstation download and free-use instructions](https://knowledge.broadcom.com/external/article/368667/download-and-license-free-vmware-desktop.html)
+- [Ubuntu Desktop requirements](https://ubuntu.com/download/desktop)

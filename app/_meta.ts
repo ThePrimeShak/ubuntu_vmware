@@ -2,7 +2,7 @@ import type { MetaRecord } from "nextra";
 
 const config: MetaRecord = {
   intro: {
-    title: "Introduction 🚀",
+    title: "Introduction",
     theme: {
       breadcrumb: false,
       copyPage: false,
@@ -10,7 +10,7 @@ const config: MetaRecord = {
   },
 
   "linux-basic": {
-    title: "Linux Basics 📚",
+    title: "Linux Basics",
     theme: {
       breadcrumb: false,
       copyPage: false,
@@ -18,7 +18,7 @@ const config: MetaRecord = {
   },
 
   "virtual-machine": {
-    title: "Virtual Machine 💻",
+    title: "Virtual Machines",
     theme: {
       breadcrumb: false,
       copyPage: false,
@@ -26,7 +26,7 @@ const config: MetaRecord = {
   },
 
   ubuntu: {
-    title: "Ubuntu 🟠",
+    title: "Ubuntu",
     theme: {
       breadcrumb: false,
       copyPage: false,
@@ -34,7 +34,7 @@ const config: MetaRecord = {
   },
 
   debian: {
-    title: "Debian 🌀",
+    title: "Debian",
     theme: {
       breadcrumb: false,
       copyPage: false,
@@ -42,7 +42,7 @@ const config: MetaRecord = {
   },
 
   terminal: {
-    title: "Terminal 💻",
+    title: "Terminal",
     theme: {
       breadcrumb: false,
       copyPage: false,
@@ -50,7 +50,7 @@ const config: MetaRecord = {
   },
 
   "linux-essential": {
-    title: "Linux Essentials ⚙️",
+    title: "Linux Essentials",
     theme: {
       breadcrumb: false,
       copyPage: false,

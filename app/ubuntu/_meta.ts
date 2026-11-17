@@ -2,21 +2,21 @@ import type { MetaRecord } from "nextra";
 
 const config: MetaRecord = {
   "why-ubuntu": {
-    title: "Why Ubuntu? ❓",
+    title: "Why Ubuntu?",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   installation: {
-    title: "Installation 📦",
+    title: "Create the VM",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   "config-ubuntu": {
-    title: "Config Ubuntu ⚙️",
+    title: "Install Ubuntu",
     theme: {
       breadcrumb: false,
       copyPage: false,

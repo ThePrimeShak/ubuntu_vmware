@@ -1,65 +1,46 @@
-# 🔀 Dual-Boot in Linux
+# Dual Boot with Linux
 
-**Dual-Boot** refers to a setup where two operating systems are installed on the same computer, allowing you to choose which one to boot into at startup.  
-For example, you can run **Windows** and **Linux** on the same machine, selecting the OS each time you power on the system.
+In a **dual-boot** setup, two operating systems are installed on physical storage and a boot menu selects one at startup. Unlike a VM, only one of the installed systems normally runs at a time and it uses the hardware directly.
 
----
+This page explains the concept; it is not a substitute for a device-specific installation plan.
 
-## 🖥️ Why Dual-Boot?
+## Before changing partitions
 
-- ✅ **Access to both OS features**: Some applications or games run only on Windows, while Linux provides better development and server tools.
-- 💾 **Resource efficiency**: Each OS uses the hardware directly, unlike virtual machines.
-- 🎓 **Learning and experimentation**: Ideal for students or developers who want hands-on experience with multiple OS environments.
+1. Create a verified backup on another device.
+2. Make a Windows recovery drive and save the BitLocker recovery key, if applicable.
+3. Check whether the computer boots in UEFI mode and uses GPT partitioning.
+4. Disable Windows Fast Startup before sharing NTFS data with Linux.
+5. Follow the [Ubuntu BitLocker guidance](https://ubuntu.com/desktop/docs/en/latest/reference/bitlocker-during-ubuntu-installation/) before installing alongside encrypted Windows. Suspending BitLocker does not decrypt the volume; the guided installer may require turning it off and waiting for decryption. Check recovery and re-encryption options before changing it, especially on a managed computer.
+6. Use Windows Disk Management to shrink the Windows partition and leave unallocated space for Linux.
 
----
+## Current UEFI/GPT layout
 
-## ⚠️ Important Considerations
+Most current PCs use GPT and an **EFI System Partition (ESP)**. The ESP is usually FAT32, not NTFS, and both operating systems can place boot files in it. GPT does not impose the old four-primary-partition limit.
 
-1. **Backup your data**: Installing a second OS can overwrite partitions and cause data loss.
-2. **Partition planning**: Each OS needs its own partition(s).
-3. **Bootloader awareness**: Linux typically uses GRUB as the bootloader; improper installation can break Windows boot.
-4. **Disk space**: Allocate enough space for both systems. For Linux, at least 20–30 GB is recommended.
+An illustrative layout might be:
 
-> 💡 Dual-boot setups are powerful but require careful preparation.
+| Partition                              | Typical format              | Purpose                                                                                 |
+| -------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------- |
+| EFI System Partition                   | FAT32                       | Existing UEFI boot files; mount at `/boot/efi`, do not format during Linux installation |
+| Microsoft reserved/recovery partitions | Microsoft-defined           | Keep unchanged                                                                          |
+| Windows system volume                  | NTFS                        | Windows and its applications                                                            |
+| Linux root `/`                         | ext4                        | Linux system and, in a simple layout, user files                                        |
+| Linux swap                             | Swap partition or swap file | Optional based on the chosen setup                                                      |
 
----
+Device names and sizes vary. NVMe storage commonly appears as `/dev/nvme0n1p1` rather than `/dev/sda1`.
 
-## 🧩 Partitioning Basics
+## Installer choices
 
-- **Primary Partition**: Required for booting Windows and Linux.
-- **Swap Partition** (Linux only): Acts as virtual memory if RAM is full.
-- **Root Partition (`/`)**: Where Linux is installed.
-- **Home Partition (`/home`)**: Optional, stores user data.
+When available, **Install alongside Windows** is the simplest automated option. Manual partitioning gives more control but also makes it easier to select or format the wrong partition.
 
-### Example Layout
+Install Windows first when building a new dual-boot computer, then Linux. Linux installers normally detect Windows and configure GRUB or another boot manager. Firmware updates and Windows updates can still change boot order, so keep recovery media available.
 
-| Partition   | Size   | File System | Purpose                  |
-| ----------- | ------ | ----------- | ------------------------ |
-| `/dev/sda1` | 100 MB | NTFS        | Windows EFI/Boot         |
-| `/dev/sda2` | 100 GB | NTFS        | Windows System           |
-| `/dev/sda3` | 30 GB  | ext4        | Linux `/` root           |
-| `/dev/sda4` | 2–4 GB | swap        | Linux swap               |
-| `/dev/sda5` | 50 GB  | ext4        | Linux `/home` (optional) |
+## Dual boot or virtual machine?
 
-> ⚡ This is a common layout; exact sizes depend on your disk and needs.
+| Choose a VM when…                      | Choose dual boot when…                                    |
+| -------------------------------------- | --------------------------------------------------------- |
+| You are learning or experimenting      | You need near-native CPU/GPU or direct hardware access    |
+| You want both systems running together | The workload does not perform well in a VM                |
+| You want easy snapshots and deletion   | You are comfortable managing partitions and boot recovery |
 
----
-
-## 🔐 Best Practices for Dual-Boot
-
-- Always **backup Windows** before starting.
-- Install **Windows first**, then Linux (Linux bootloader can detect Windows).
-- Use **manual partitioning** during Linux installation to avoid overwriting Windows.
-- Avoid using Windows fast startup (disable hibernation) to prevent filesystem corruption.
-- Test the bootloader after installation to ensure both OS options appear.
-
----
-
-## 📝 Summary
-
-- Dual-Boot lets you run **two OSes on one machine**.
-- Proper **partitioning, backups, and bootloader management** are critical.
-- Ideal for learning, development, and accessing OS-specific software.
-- For lab exercises, always follow **careful, step-by-step installation procedures**.
-
-> 🚀 Dual-Boot is a bridge between Windows and Linux. Mastering its setup helps you confidently manage multi-OS environments.
+For this operating-systems lab, a VM is the recommended default because it is easier to reproduce and recover.

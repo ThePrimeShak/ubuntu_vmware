@@ -1,76 +1,55 @@
-# 💾 Swap in Linux
+# Swap in Linux
 
-**Swap** is a dedicated space on your storage device (disk or SSD) that Linux uses as **virtual memory** when the physical RAM is full.  
-It acts as an overflow area to ensure that the system continues to function when memory usage is high.
+**Swap** is storage space that the kernel can use for memory pages that do not currently need to remain in RAM. It can help the system keep useful file-cache data in RAM and can provide breathing room during short memory spikes. It is much slower than RAM and does not guarantee that an out-of-memory condition will never occur.
 
----
+## Swap file and swap partition
 
-## 🧠 Why Swap Exists
+- A **swap file** lives inside a filesystem and is easy to add or resize. Ubuntu commonly uses this approach.
+- A **swap partition** is a dedicated disk partition. It remains useful for some layouts and installer choices but is less flexible to resize.
 
-- RAM is limited. When running multiple applications, the system may run out of memory.
-- Swap provides extra space so Linux can temporarily move inactive memory pages from RAM to disk.
-- This prevents **system crashes or slowdowns** due to memory exhaustion.
+Both methods are valid. The workload, storage layout, hibernation needs, and system configuration matter more than the format.
 
----
+## How much swap?
 
-## 📂 Types of Swap
+There is no universal “twice the RAM” rule for current systems. A development VM with 4 GB of RAM might use a 2–4 GB swap file, while a memory-heavy workload may need more. Systems intended to hibernate usually need enough swap for the memory image plus overhead and must be configured to resume from it.
 
-1. **Swap Partition**
-   - A dedicated disk partition for swap.
-   - Usually created during Linux installation.
+Heavy, continuous swap activity—sometimes called thrashing—means performance will be poor. Reduce the workload or allocate more RAM rather than treating swap as equivalent memory.
 
-2. **Swap File**
-   - A regular file within the filesystem used as swap space.
-   - Can be added or resized without repartitioning the disk.
+## Inspect swap and memory
 
-> 💡 Modern Linux systems can use either method. Swap files are flexible; swap partitions are traditional.
+```bash
+free -h
+swapon --show
+cat /proc/swaps
+```
 
----
+## Create a 2 GB swap file
 
-## ⚡ How Swap Works
+This example is for a new swap file on a local **ext4** filesystem. First run `findmnt -no FSTYPE /`, `swapon --show`, and `sudo ls -ld /swapfile`. Continue only if the filesystem is ext4 and `/swapfile` does not exist. If it already exists, inspect the existing swap configuration instead of overwriting it. Btrfs and other filesystems need different handling; consult the [swapon manual](https://man7.org/linux/man-pages/man8/swapon.8.html).
 
-- When RAM fills up, Linux moves inactive pages to swap.
-- Active processes stay in RAM for fast access.
-- Swap is slower than RAM, so relying on it heavily may reduce performance.
+Run each step separately and stop if any command fails:
 
-> Think of swap as a **backup workspace for memory**.
+```bash
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+```
 
----
+Verify it with `swapon --show`. To activate it after reboot, add this exact line to `/etc/fstab` only after checking that another `/swapfile` entry does not already exist:
 
-## 📝 Best Practices
+```text
+/swapfile none swap sw 0 0
+```
 
-- **Size recommendations**:
-  - 1–2× RAM if RAM < 4 GB
-  - Equal or slightly less than RAM if RAM ≥ 4 GB
-  - Adjust according to workload (e.g., heavy compilation, virtualization)
-- **Enable hibernation**: Swap must be at least as large as RAM.
-- **Monitor swap usage**: Use `free -h` or `swapon --show` to check usage.
-- Avoid putting swap on slow disks if performance matters.
+> `mkswap` overwrites swap metadata on its target. Never substitute a device path unless you have positively identified the intended partition.
 
----
+## Swappiness
 
-## 🖥️ Useful Commands
+`vm.swappiness` influences how readily the kernel chooses swap relative to reclaiming other memory. It is a preference, not a percentage of RAM reserved for swap.
 
-| Command                          | Description                           | Example                                                       |
-| -------------------------------- | ------------------------------------- | ------------------------------------------------------------- |
-| `swapon --show`                  | Show active swap                      | `swapon --show`                                               |
-| `free -h`                        | Display memory and swap usage         | `free -h`                                                     |
-| `sudo mkswap /dev/sda4`          | Format a partition as swap            | `sudo mkswap /dev/sda4`                                       |
-| `sudo swapon /dev/sda4`          | Enable swap on a partition            | `sudo swapon /dev/sda4`                                       |
-| `sudo swapoff /dev/sda4`         | Disable swap temporarily              | `sudo swapoff /dev/sda4`                                      |
-| `sudo fallocate -l 2G /swapfile` | Create a swap file                    | `sudo fallocate -l 2G /swapfile`                              |
-| `sudo chmod 600 /swapfile`       | Set correct permissions for swap file | `sudo chmod 600 /swapfile`                                    |
-| `sudo mkswap /swapfile`          | Format swap file                      | `sudo mkswap /swapfile`                                       |
-| `sudo swapon /swapfile`          | Activate swap file                    | `sudo swapon /swapfile`                                       |
-| `sudo nano /etc/fstab`           | Add swap entry to fstab               | `echo '/swapfile none swap sw 0 0' \| sudo tee -a /etc/fstab` |
+```bash
+sysctl vm.swappiness
+```
 
----
-
-## 🔐 Summary
-
-- Swap is **virtual memory** used when RAM is full.
-- Can be a **partition** or a **file**.
-- Helps **prevent crashes** and maintain system stability.
-- Proper sizing and monitoring ensure **efficient system performance**.
-
-> 🚀 Understanding swap is crucial for Linux administration, virtualization, and handling memory-intensive tasks.
+Change it only for a measured workload and document the reason; the distribution default is a sensible starting point for a lab VM.

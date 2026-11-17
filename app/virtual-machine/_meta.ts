@@ -2,14 +2,14 @@ import type { MetaRecord } from "nextra";
 
 const config: MetaRecord = {
   vmware: {
-    title: "VMware 🖥️",
+    title: "Virtualization Basics",
     theme: {
       breadcrumb: false,
       copyPage: false,
     },
   },
   installation: {
-    title: "Installation 🔧",
+    title: "Install VMware",
     theme: {
       breadcrumb: false,
       copyPage: false,
