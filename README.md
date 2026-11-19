@@ -1,39 +1,58 @@
 # Linux & Virtualization Lab
 
-A responsive learning guide for an Operating Systems Laboratory course. It covers Linux fundamentals, virtualization, VMware Workstation, Ubuntu and Debian installation, terminal commands, root access, swap, and dual boot.
+A Linux and virtualization learning guide built with Next.js and Nextra for a university OS lab course.
+
+**Live demo:** [Open on Vercel](https://ubuntu-vmware-wenp.vercel.app)
+
+## Overview
+
+Created for a university Operating Systems Laboratory course as a responsive guide to Linux fundamentals and virtual machines.
+
+## Features
+
+- Follow VMware Workstation and Ubuntu/Debian installation guides.
+- Explore terminal commands, root access, swap, and dual boot.
+- Navigate illustrated MDX lessons with the Nextra documentation theme.
+- Search indexed documentation with Pagefind.
 
 ## Tech stack
 
-- Next.js 15 and React 19
-- Nextra 4 documentation theme
-- TypeScript and Tailwind CSS
-- Pagefind search
+Next.js 15, React 19, TypeScript, Nextra 4, Tailwind CSS, Pagefind.
 
 ## Run locally
 
-Use Node.js 20 or newer.
+Use Node.js 22.12 or newer and npm.
 
-```bash
-npm install
+```sh
+git clone https://github.com/ThePrimeShak/ubuntu_vmware.git
+cd ubuntu_vmware
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The root URL redirects to `/intro`.
+## Available scripts
 
-## Quality checks
-
-```bash
-npm run lint
-npm run format:check
-npm run build
-```
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create the production build |
+| `npm run start` | Serve the production Next.js build |
+| `npm run lint` | Check code with ESLint |
+| `npm run lint:fix` | Apply ESLint fixes |
+| `npm run format` | Format project files |
+| `npm run format:check` | Check formatting |
+| `npm run postbuild` | Generate the Pagefind search index |
 
 ## Project structure
 
-- `app/` — documentation pages, navigation metadata, and global styling
-- `public/images/` — step-by-step installation screenshots
-- `next.config.mjs` — Nextra and redirect configuration
+- `app/` — documentation pages, navigation metadata, and global styles.
+- `public/images/` — installation screenshots.
+- `next.config.mjs` — Nextra and redirect configuration.
+
+## Scope and limitations
+
+Educational documentation rather than a virtualization tool. The root URL redirects to `/intro`. The build generates the Pagefind search index.
 
 ## Author
 
-Created by [ThePrimeShak](https://www.linkedin.com/in/ThePrimeShak) for an Operating Systems Lab course. Source code is available on [GitHub](https://github.com/ThePrimeShak/ubuntu_vmware).
+Built by [ThePrimeShak](https://github.com/ThePrimeShak) · [LinkedIn](https://www.linkedin.com/in/theprimeshak/).
